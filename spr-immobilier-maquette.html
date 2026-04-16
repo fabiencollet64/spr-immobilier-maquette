@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPR Immobilier — Maquette page d'accueil</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #F5F5F3;
+      color: #1A2E4A;
+    }
+
+    /* ── NAVIGATION ── */
+    .nav {
+      background: #FFFFFF;
+      border-bottom: 2px solid #1A2E4A;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: #1A2E4A;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-text {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #1A2E4A;
+      letter-spacing: 0.08em;
+    }
+    .logo-text span { color: #8B2635; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: #1A2E4A;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-phone {
+      font-size: 14px;
+      font-weight: bold;
+      color: #1A2E4A;
+      letter-spacing: 0.03em;
+    }
+    .btn-bordeaux {
+      background: #8B2635;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 10px 22px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-bordeaux:hover { background: #6E1D28; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 500px;
+      background: #FFFFFF;
+    }
+    .hero-left {
+      padding: 60px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #E8E6E1;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.18em;
+      color: #8B2635;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-h1 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #1A2E4A;
+      margin-bottom: 22px;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: #8B2635;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: #3D4E5F;
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #E8E6E1;
+      padding-top: 28px;
+    }
+    .stat {
+      padding-right: 24px;
+      border-right: 1px solid #E8E6E1;
+    }
+    .stat:nth-child(2) { padding: 0 24px; }
+    .stat:last-child { padding-left: 24px; padding-right: 0; border-right: none; }
+    .stat-n {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      color: #1A2E4A;
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: 11px;
+      color: #5A6A7A;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .hero-right {
+      background: #EEF0F2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-photo {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .hero-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .search-widget {
+      background: #FFFFFF;
+      border-top: 3px solid #1A2E4A;
+      padding: 24px 28px;
+    }
+    .sw-tabs {
+      display: flex;
+      margin-bottom: 18px;
+    }
+    .sw-tab {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 8px 20px;
+      border: 1px solid #C8C6C1;
+      background: #FFFFFF;
+      color: #3D4E5F;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+    .sw-tab:first-child { border-radius: 4px 0 0 4px; }
+    .sw-tab:last-child { border-radius: 0 4px 4px 0; }
+    .sw-tab.active, .sw-tab:hover {
+      background: #1A2E4A;
+      color: #FFFFFF;
+      border-color: #1A2E4A;
+    }
+    .sw-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+    .sw-field label {
+      font-size: 10px;
+      font-weight: bold;
+      color: #1A2E4A;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .sw-field select {
+      width: 100%;
+      border: 1px solid #B0AEA9;
+      border-radius: 4px;
+      padding: 9px 12px;
+      font-size: 13px;
+      background: #FFFFFF;
+      color: #1A2E4A;
+      cursor: pointer;
+    }
+    .sw-btn {
+      background: #8B2635;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      height: 38px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .sw-btn:hover { background: #6E1D28; }
+
+    /* ── BIENS ── */
+    .section {
+      padding: 56px 48px;
+    }
+    .section-light { background: #F5F5F3; }
+    .section-white { background: #FFFFFF; }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .section-accent {
+      width: 40px;
+      height: 3px;
+      background: #8B2635;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #1A2E4A;
+    }
+    .section-link {
+      font-size: 12px;
+      color: #8B2635;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .section-link:hover { text-decoration: underline; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #D0CEC9;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(26,46,74,0.1); }
+    .card-img {
+      height: 200px;
+      background: #E2E5E8;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #D0CEC9;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #1A2E4A;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+    }
+    .card-heart {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #8B2635;
+      color: #FFFFFF;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+    .card-body { padding: 18px 20px; }
+    .card-price {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      color: #1A2E4A;
+      margin-bottom: 4px;
+    }
+    .card-addr {
+      font-size: 12px;
+      color: #5A6A7A;
+      margin-bottom: 12px;
+    }
+    .card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pill {
+      font-size: 11px;
+      font-weight: bold;
+      background: #EEF0F2;
+      color: #1A2E4A;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #C8C6C1;
+    }
+    .card-cta {
+      display: block;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #8B2635;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .card-cta:hover { text-decoration: underline; }
+
+    /* ── EXPERT ── */
+    .expert-band {
+      background: #1A2E4A;
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+    .exp-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #2D4A6A;
+      border: 3px solid #8B2635;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .exp-init {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      color: #FFFFFF;
+    }
+    .exp-name {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .exp-role {
+      font-size: 11px;
+      color: #8BA8C4;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .exp-bio {
+      font-size: 14px;
+      color: #B8C8D8;
+      line-height: 1.8;
+      max-width: 460px;
+    }
+    .exp-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-white {
+      background: #FFFFFF;
+      color: #1A2E4A;
+      border: none;
+      border-radius: 4px;
+      padding: 13px 26px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .btn-white:hover { background: #E8E6E1; }
+    .btn-outline-w {
+      background: transparent;
+      color: #FFFFFF;
+      border: 1.5px solid #4A6A8A;
+      border-radius: 4px;
+      padding: 12px 26px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .btn-outline-w:hover { border-color: #8BA8C4; }
+
+    /* ── AVIS ── */
+    .stars-row { display: flex; gap: 3px; margin-top: 5px; }
+    .star {
+      width: 15px;
+      height: 15px;
+      background: #C8972A;
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    }
+    .note-big {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      color: #1A2E4A;
+    }
+    .note-sub {
+      font-size: 11px;
+      color: #5A6A7A;
+      margin-top: 3px;
+    }
+    .avis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .avis-card {
+      background: #F5F5F3;
+      border: 1px solid #D0CEC9;
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .av-quote {
+      font-family: Georgia, serif;
+      font-size: 40px;
+      color: #C8B89A;
+      line-height: 0.8;
+      margin-bottom: 10px;
+    }
+    .av-txt {
+      font-size: 13px;
+      color: #2D3D4E;
+      line-height: 1.75;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .av-name {
+      font-size: 12px;
+      font-weight: bold;
+      color: #1A2E4A;
+    }
+    .av-detail {
+      font-size: 11px;
+      color: #5A6A7A;
+      margin-top: 3px;
+    }
+    .gv-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .gv-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3B6D11;
+      flex-shrink: 0;
+    }
+    .gv-txt {
+      font-size: 10px;
+      color: #3B6D11;
+      font-weight: bold;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #12213A;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 3px solid #8B2635;
+    }
+    .ft-logo {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: #FFFFFF;
+      letter-spacing: 0.08em;
+    }
+    .ft-logo span { color: #C8B89A; }
+    .ft-info {
+      font-size: 12px;
+      color: #7A8FA0;
+      text-align: center;
+      line-height: 2;
+    }
+    .ft-links {
+      display: flex;
+      gap: 24px;
+    }
+    .ft-links a {
+      font-size: 11px;
+      color: #7A8FA0;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .ft-links a:hover { color: #FFFFFF; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 260px; }
+      .sw-row { grid-template-columns: 1fr 1fr; }
+      .sw-btn { grid-column: 1 / -1; width: 100%; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .expert-band { grid-template-columns: 1fr; text-align: center; }
+      .exp-bio { max-width: 100%; }
+      .exp-cta { flex-direction: row; justify-content: center; }
+      .avis-grid { grid-template-columns: 1fr; }
+      .section { padding: 36px 20px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a class="nav-logo" href="#">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M11 3L3 9v10h5v-6h6v6h5V9L11 3z" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-text">SPR <span>Immobilier</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">Vente</a></li>
+      <li><a href="#">Location</a></li>
+      <li><a href="#">Notre agence</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-phone">01 40 25 96 60</span>
+      <a href="#" class="btn-bordeaux">Estimation gratuite</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div>
+        <p class="hero-eyebrow">Agence indépendante · Paris 17e · Batignolles</p>
+        <h1 class="hero-h1">
+          L'immobilier<br>
+          des <em>Batignolles</em>,<br>
+          par un expert du quartier
+        </h1>
+        <p class="hero-sub">
+          Fondée il y a plus de 20 ans au cœur du 17e, SPR Immobilier vous accompagne
+          avec une connaissance intime du quartier, de ses rues et de ses prix réels.
+        </p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-n">+20 ans</div>
+          <div class="stat-l">d'expertise locale<br>aux Batignolles</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">97 %</div>
+          <div class="stat-l">du prix demandé<br>obtenu en moyenne</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">&lt; 60 j</div>
+          <div class="stat-l">délai moyen<br>de vente</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo">
+        <img src="img-immeuble.jpg" alt="Immeuble haussmannien Paris 17e" />
+      </div>
+      <div class="search-widget">
+        <div class="sw-tabs">
+          <button class="sw-tab active">Acheter</button>
+          <button class="sw-tab">Louer</button>
+          <button class="sw-tab">Estimer</button>
+        </div>
+        <div class="sw-row">
+          <div class="sw-field">
+            <label>Type de bien</label>
+            <select>
+              <option>Appartement</option>
+              <option>Maison</option>
+              <option>Garage</option>
+            </select>
+          </div>
+          <div class="sw-field">
+            <label>Secteur</label>
+            <select>
+              <option>75017 — Paris</option>
+              <option>92250 — La Garenne-Colombes</option>
+            </select>
+          </div>
+          <button class="sw-btn">Rechercher</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SÉLECTION DE BIENS -->
+  <section class="section section-light">
+    <div class="section-header">
+      <div>
+        <div class="section-accent"></div>
+        <h2 class="section-title">Notre sélection de biens</h2>
+      </div>
+      <a href="#" class="section-link">Voir toutes les annonces →</a>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-img">
+          <img src="img-rue-paris.jpg" alt="Maison Batignolles Paris 17e" />
+          <span class="card-badge">Vente</span>
+          <span class="card-heart">Coup de cœur</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">1 450 000 €</div>
+          <div class="card-addr">Batignolles · Paris 17e</div>
+          <div class="card-pills">
+            <span class="pill">Maison</span>
+            <span class="pill">100 m²</span>
+            <span class="pill">5 pièces</span>
+            <span class="pill">Terrasse</span>
+          </div>
+          <a class="card-cta" href="#">Voir le bien →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="img-toits-paris.jpg" alt="Appartement vue toits Paris 17e" />
+          <span class="card-badge">Vente</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">615 000 €</div>
+          <div class="card-addr">Rue Cardinet · Paris 17e</div>
+          <div class="card-pills">
+            <span class="pill">Appartement</span>
+            <span class="pill">50 m²</span>
+            <span class="pill">2 pièces</span>
+            <span class="pill">Parking</span>
+          </div>
+          <a class="card-cta" href="#">Voir le bien →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <img src="img-balcon-paris.jpg" alt="Appartement avec balcon Batignolles Paris 17e" />
+          <span class="card-badge">Vente</span>
+        </div>
+        <div class="card-body">
+          <div class="card-price">470 000 €</div>
+          <div class="card-addr">Batignolles · Paris 17e</div>
+          <div class="card-pills">
+            <span class="pill">Appartement</span>
+            <span class="pill">61 m²</span>
+            <span class="pill">3 pièces</span>
+            <span class="pill">Cachet</span>
+          </div>
+          <a class="card-cta" href="#">Voir le bien →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERT -->
+  <div class="expert-band">
+    <div class="exp-avatar">
+      <span class="exp-init">PR</span>
+    </div>
+    <div>
+      <div class="exp-name">Pascal Rivière</div>
+      <div class="exp-role">Fondateur · Expert Batignolles depuis 1995</div>
+      <p class="exp-bio">
+        Enfant du quartier, j'habite les Batignolles depuis plus de 40 ans.
+        Ma connaissance intime de chaque rue, chaque immeuble et des prix réels
+        du secteur est votre meilleur atout pour vendre au juste prix, rapidement.
+      </p>
+    </div>
+    <div class="exp-cta">
+      <a href="#" class="btn-white">Demander une estimation</a>
+      <a href="#" class="btn-outline-w">Prendre contact</a>
+    </div>
+  </div>
+
+  <!-- AVIS CLIENTS -->
+  <section class="section section-white">
+    <div class="section-header">
+      <div>
+        <div class="section-accent"></div>
+        <h2 class="section-title">Ce que disent nos clients</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="note-big">4,9</span>
+        <div>
+          <div class="stars-row">
+            <div class="star"></div><div class="star"></div><div class="star"></div>
+            <div class="star"></div><div class="star"></div>
+          </div>
+          <p class="note-sub">38 avis Google vérifiés</p>
+        </div>
+      </div>
+    </div>
+    <div class="avis-grid">
+      <div class="avis-card">
+        <div class="av-quote">"</div>
+        <p class="av-txt">Vente conclue en 3 semaines au prix demandé. Pascal connaît chaque détail du marché Batignolles — c'est rassurant et très efficace.</p>
+        <div class="av-name">Marie-Hélène D.</div>
+        <div class="av-detail">Vendeuse · Rue des Batignolles</div>
+        <div class="gv-badge"><div class="gv-dot"></div><span class="gv-txt">Avis Google vérifié</span></div>
+      </div>
+      <div class="avis-card">
+        <div class="av-quote">"</div>
+        <p class="av-txt">Une agence à taille humaine qui s'implique vraiment. Nous avons trouvé notre appartement familial en seulement deux visites.</p>
+        <div class="av-name">Thomas &amp; Camille B.</div>
+        <div class="av-detail">Acheteurs · Paris 17e</div>
+        <div class="gv-badge"><div class="gv-dot"></div><span class="gv-txt">Avis Google vérifié</span></div>
+      </div>
+      <div class="avis-card">
+        <div class="av-quote">"</div>
+        <p class="av-txt">Estimation très précise, bien au-dessus des agences nationales. Le bien a finalement été vendu 2 % au-dessus du prix estimé.</p>
+        <div class="av-name">Laurent M.</div>
+        <div class="av-detail">Vendeur · La Garenne-Colombes</div>
+        <div class="gv-badge"><div class="gv-dot"></div><span class="gv-txt">Avis Google vérifié</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-logo">SPR <span>Immobilier</span></div>
+    <div class="ft-info">
+      67 Place du Dr Félix-Lobligeois · 75017 Paris<br>
+      01 40 25 96 60 · info@spr-immobilier.fr
+    </div>
+    <div class="ft-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Plan du site</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.sw-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.sw-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
